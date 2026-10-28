@@ -10,7 +10,7 @@ CREATE TABLE "account" (
 	"refresh_token_expires_at" timestamp,
 	"scope" text,
 	"password" text,
-	"created_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updated_at" timestamp NOT NULL
 );
 --> statement-breakpoint
@@ -36,7 +36,7 @@ CREATE TABLE "ai_task" (
 	"prompt" text NOT NULL,
 	"options" text,
 	"status" text NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	"deleted_at" timestamp,
 	"task_id" text,
@@ -56,7 +56,7 @@ CREATE TABLE "apikey" (
 	"title" text NOT NULL,
 	"status" text NOT NULL,
 	"last_used_at" timestamp,
-	"created_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	"deleted_at" timestamp,
 	"type" text DEFAULT 'user' NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE "chat" (
 	"id" text PRIMARY KEY NOT NULL,
 	"user_id" text NOT NULL,
 	"status" text NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	"model" text NOT NULL,
 	"provider" text NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE "chat_message" (
 	"user_id" text NOT NULL,
 	"chat_id" text NOT NULL,
 	"status" text NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	"role" text NOT NULL,
 	"parts" text NOT NULL,
@@ -111,7 +111,7 @@ CREATE TABLE "credit" (
 	"description" text,
 	"expires_at" timestamp,
 	"status" text NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	"deleted_at" timestamp,
 	"consumed_detail" text,
@@ -128,7 +128,7 @@ CREATE TABLE "invite_code" (
 	"note" text DEFAULT '',
 	"created_by" text,
 	"expires_at" timestamp,
-	"created_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	CONSTRAINT "invite_code_code_unique" UNIQUE("code")
 );
 --> statement-breakpoint
@@ -155,7 +155,7 @@ CREATE TABLE "order" (
 	"payment_amount" integer,
 	"payment_currency" text,
 	"paid_at" timestamp,
-	"created_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	"deleted_at" timestamp,
 	"description" text,
@@ -187,7 +187,7 @@ CREATE TABLE "permission" (
 	"action" text NOT NULL,
 	"title" text NOT NULL,
 	"description" text,
-	"created_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	CONSTRAINT "permission_code_unique" UNIQUE("code")
 );
@@ -207,7 +207,7 @@ CREATE TABLE "post" (
 	"author_name" text,
 	"author_image" text,
 	"status" text NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	"deleted_at" timestamp,
 	"sort" integer DEFAULT 0 NOT NULL,
@@ -220,7 +220,7 @@ CREATE TABLE "role" (
 	"title" text NOT NULL,
 	"description" text,
 	"status" text NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	"sort" integer DEFAULT 0 NOT NULL,
 	CONSTRAINT "role_name_unique" UNIQUE("name")
@@ -230,7 +230,7 @@ CREATE TABLE "role_permission" (
 	"id" text PRIMARY KEY NOT NULL,
 	"role_id" text NOT NULL,
 	"permission_id" text NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	"deleted_at" timestamp
 );
@@ -239,7 +239,7 @@ CREATE TABLE "session" (
 	"id" text PRIMARY KEY NOT NULL,
 	"expires_at" timestamp NOT NULL,
 	"token" text NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	"ip_address" text,
 	"user_agent" text,
@@ -265,7 +265,7 @@ CREATE TABLE "subscription" (
 	"trial_period_days" integer,
 	"current_period_start" timestamp,
 	"current_period_end" timestamp,
-	"created_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	"deleted_at" timestamp,
 	"plan_name" text,
@@ -293,7 +293,7 @@ CREATE TABLE "taxonomy" (
 	"image" text,
 	"icon" text,
 	"status" text NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	"deleted_at" timestamp,
 	"sort" integer DEFAULT 0 NOT NULL,
@@ -305,8 +305,8 @@ CREATE TABLE "ticket" (
 	"user_id" text NOT NULL,
 	"title" text NOT NULL,
 	"status" text DEFAULT 'open' NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "ticket_message" (
@@ -316,7 +316,7 @@ CREATE TABLE "ticket_message" (
 	"role" text DEFAULT 'user' NOT NULL,
 	"content" text NOT NULL,
 	"attachments" text DEFAULT '[]' NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "user" (
@@ -325,8 +325,8 @@ CREATE TABLE "user" (
 	"email" text NOT NULL,
 	"email_verified" boolean DEFAULT false NOT NULL,
 	"image" text,
-	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"utm_source" text DEFAULT '' NOT NULL,
 	"ip" text DEFAULT '' NOT NULL,
 	"locale" text DEFAULT '' NOT NULL,
@@ -353,7 +353,7 @@ CREATE TABLE "user_invite" (
 	"id" text PRIMARY KEY NOT NULL,
 	"user_id" text NOT NULL,
 	"invite_code_id" text NOT NULL,
-	"activated_at" timestamp DEFAULT now() NOT NULL,
+	"activated_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"trial_ends_at" timestamp NOT NULL
 );
 --> statement-breakpoint
@@ -361,7 +361,7 @@ CREATE TABLE "user_role" (
 	"id" text PRIMARY KEY NOT NULL,
 	"user_id" text NOT NULL,
 	"role_id" text NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL,
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"updated_at" timestamp NOT NULL,
 	"expires_at" timestamp
 );
@@ -371,67 +371,48 @@ CREATE TABLE "verification" (
 	"identifier" text NOT NULL,
 	"value" text NOT NULL,
 	"expires_at" timestamp NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL
+	"created_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	"updated_at" timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 --> statement-breakpoint
-ALTER TABLE "account" ADD CONSTRAINT "account_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "ai_task" ADD CONSTRAINT "ai_task_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "apikey" ADD CONSTRAINT "apikey_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "chat" ADD CONSTRAINT "chat_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "chat_message" ADD CONSTRAINT "chat_message_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "chat_message" ADD CONSTRAINT "chat_message_chat_id_chat_id_fk" FOREIGN KEY ("chat_id") REFERENCES "public"."chat"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "credit" ADD CONSTRAINT "credit_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "invite_code" ADD CONSTRAINT "invite_code_created_by_user_id_fk" FOREIGN KEY ("created_by") REFERENCES "public"."user"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "order" ADD CONSTRAINT "order_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "post" ADD CONSTRAINT "post_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "role_permission" ADD CONSTRAINT "role_permission_role_id_role_id_fk" FOREIGN KEY ("role_id") REFERENCES "public"."role"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "role_permission" ADD CONSTRAINT "role_permission_permission_id_permission_id_fk" FOREIGN KEY ("permission_id") REFERENCES "public"."permission"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "session" ADD CONSTRAINT "session_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "subscription" ADD CONSTRAINT "subscription_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "taxonomy" ADD CONSTRAINT "taxonomy_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "ticket" ADD CONSTRAINT "ticket_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "ticket_message" ADD CONSTRAINT "ticket_message_ticket_id_ticket_id_fk" FOREIGN KEY ("ticket_id") REFERENCES "public"."ticket"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "ticket_message" ADD CONSTRAINT "ticket_message_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "user_event" ADD CONSTRAINT "user_event_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "user_invite" ADD CONSTRAINT "user_invite_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "user_invite" ADD CONSTRAINT "user_invite_invite_code_id_invite_code_id_fk" FOREIGN KEY ("invite_code_id") REFERENCES "public"."invite_code"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "user_role" ADD CONSTRAINT "user_role_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "user_role" ADD CONSTRAINT "user_role_role_id_role_id_fk" FOREIGN KEY ("role_id") REFERENCES "public"."role"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-CREATE INDEX "idx_account_user_id" ON "account" USING btree ("user_id");--> statement-breakpoint
-CREATE INDEX "idx_account_provider_account" ON "account" USING btree ("provider_id","account_id");--> statement-breakpoint
-CREATE INDEX "idx_admin_execution_created" ON "admin_execution" USING btree ("created_at");--> statement-breakpoint
-CREATE INDEX "idx_ai_task_user_media_type" ON "ai_task" USING btree ("user_id","media_type");--> statement-breakpoint
-CREATE INDEX "idx_ai_task_media_type_status" ON "ai_task" USING btree ("media_type","status");--> statement-breakpoint
-CREATE INDEX "idx_apikey_user_status" ON "apikey" USING btree ("user_id","status");--> statement-breakpoint
-CREATE INDEX "idx_apikey_keyhash_status" ON "apikey" USING btree ("key_hash","status");--> statement-breakpoint
-CREATE INDEX "idx_chat_user_status" ON "chat" USING btree ("user_id","status");--> statement-breakpoint
-CREATE INDEX "idx_chat_message_chat_id" ON "chat_message" USING btree ("chat_id","status");--> statement-breakpoint
-CREATE INDEX "idx_chat_message_user_id" ON "chat_message" USING btree ("user_id","status");--> statement-breakpoint
-CREATE INDEX "idx_credit_consume_fifo" ON "credit" USING btree ("user_id","status","transaction_type","remaining_credits","expires_at");--> statement-breakpoint
-CREATE INDEX "idx_credit_order_no" ON "credit" USING btree ("order_no");--> statement-breakpoint
-CREATE INDEX "idx_credit_subscription_no" ON "credit" USING btree ("subscription_no");--> statement-breakpoint
-CREATE INDEX "idx_invite_code_code" ON "invite_code" USING btree ("code");--> statement-breakpoint
-CREATE INDEX "idx_order_user_status_payment_type" ON "order" USING btree ("user_id","status","payment_type");--> statement-breakpoint
-CREATE INDEX "idx_order_transaction_provider" ON "order" USING btree ("transaction_id","payment_provider");--> statement-breakpoint
-CREATE INDEX "idx_order_created_at" ON "order" USING btree ("created_at");--> statement-breakpoint
-CREATE INDEX "idx_permission_resource_action" ON "permission" USING btree ("resource","action");--> statement-breakpoint
-CREATE INDEX "idx_post_type_status" ON "post" USING btree ("type","status");--> statement-breakpoint
-CREATE INDEX "idx_role_status" ON "role" USING btree ("status");--> statement-breakpoint
-CREATE INDEX "idx_role_permission_role_permission" ON "role_permission" USING btree ("role_id","permission_id");--> statement-breakpoint
-CREATE INDEX "idx_session_user_expires" ON "session" USING btree ("user_id","expires_at");--> statement-breakpoint
-CREATE INDEX "idx_subscription_user_status_interval" ON "subscription" USING btree ("user_id","status","interval");--> statement-breakpoint
-CREATE INDEX "idx_subscription_provider_id" ON "subscription" USING btree ("subscription_id","payment_provider");--> statement-breakpoint
-CREATE INDEX "idx_subscription_created_at" ON "subscription" USING btree ("created_at");--> statement-breakpoint
-CREATE INDEX "idx_taxonomy_type_status" ON "taxonomy" USING btree ("type","status");--> statement-breakpoint
-CREATE INDEX "idx_ticket_user" ON "ticket" USING btree ("user_id");--> statement-breakpoint
-CREATE INDEX "idx_ticket_status" ON "ticket" USING btree ("status");--> statement-breakpoint
-CREATE INDEX "idx_ticket_message_ticket" ON "ticket_message" USING btree ("ticket_id");--> statement-breakpoint
-CREATE INDEX "idx_user_name" ON "user" USING btree ("name");--> statement-breakpoint
-CREATE INDEX "idx_user_created_at" ON "user" USING btree ("created_at");--> statement-breakpoint
-CREATE INDEX "idx_user_event_user_created" ON "user_event" USING btree ("user_id","created_at");--> statement-breakpoint
-CREATE INDEX "idx_user_event_kind_created" ON "user_event" USING btree ("kind","created_at");--> statement-breakpoint
-CREATE INDEX "idx_user_invite_user" ON "user_invite" USING btree ("user_id");--> statement-breakpoint
-CREATE INDEX "idx_user_invite_code" ON "user_invite" USING btree ("invite_code_id");--> statement-breakpoint
-CREATE INDEX "idx_user_role_user_expires" ON "user_role" USING btree ("user_id","expires_at");--> statement-breakpoint
-CREATE INDEX "idx_verification_identifier" ON "verification" USING btree ("identifier");
+-- Cloudflare D1 is SQLite.  Drizzle generated PostgreSQL-style ALTER TABLE
+-- foreign-key statements and explicit `USING btree` clauses above; neither is
+-- valid D1 SQL.  The application enforces these relationships in its service
+-- layer, and its correctness-critical credit updates are transactional.
+CREATE INDEX "idx_account_user_id" ON "account" ("user_id");--> statement-breakpoint
+CREATE INDEX "idx_account_provider_account" ON "account" ("provider_id","account_id");--> statement-breakpoint
+CREATE INDEX "idx_admin_execution_created" ON "admin_execution" ("created_at");--> statement-breakpoint
+CREATE INDEX "idx_ai_task_user_media_type" ON "ai_task" ("user_id","media_type");--> statement-breakpoint
+CREATE INDEX "idx_ai_task_media_type_status" ON "ai_task" ("media_type","status");--> statement-breakpoint
+CREATE INDEX "idx_apikey_user_status" ON "apikey" ("user_id","status");--> statement-breakpoint
+CREATE INDEX "idx_apikey_keyhash_status" ON "apikey" ("key_hash","status");--> statement-breakpoint
+CREATE INDEX "idx_chat_user_status" ON "chat" ("user_id","status");--> statement-breakpoint
+CREATE INDEX "idx_chat_message_chat_id" ON "chat_message" ("chat_id","status");--> statement-breakpoint
+CREATE INDEX "idx_chat_message_user_id" ON "chat_message" ("user_id","status");--> statement-breakpoint
+CREATE INDEX "idx_credit_consume_fifo" ON "credit" ("user_id","status","transaction_type","remaining_credits","expires_at");--> statement-breakpoint
+CREATE INDEX "idx_credit_order_no" ON "credit" ("order_no");--> statement-breakpoint
+CREATE INDEX "idx_credit_subscription_no" ON "credit" ("subscription_no");--> statement-breakpoint
+CREATE INDEX "idx_invite_code_code" ON "invite_code" ("code");--> statement-breakpoint
+CREATE INDEX "idx_order_user_status_payment_type" ON "order" ("user_id","status","payment_type");--> statement-breakpoint
+CREATE INDEX "idx_order_transaction_provider" ON "order" ("transaction_id","payment_provider");--> statement-breakpoint
+CREATE INDEX "idx_order_created_at" ON "order" ("created_at");--> statement-breakpoint
+CREATE INDEX "idx_permission_resource_action" ON "permission" ("resource","action");--> statement-breakpoint
+CREATE INDEX "idx_post_type_status" ON "post" ("type","status");--> statement-breakpoint
+CREATE INDEX "idx_role_status" ON "role" ("status");--> statement-breakpoint
+CREATE INDEX "idx_role_permission_role_permission" ON "role_permission" ("role_id","permission_id");--> statement-breakpoint
+CREATE INDEX "idx_session_user_expires" ON "session" ("user_id","expires_at");--> statement-breakpoint
+CREATE INDEX "idx_subscription_user_status_interval" ON "subscription" ("user_id","status","interval");--> statement-breakpoint
+CREATE INDEX "idx_subscription_provider_id" ON "subscription" ("subscription_id","payment_provider");--> statement-breakpoint
+CREATE INDEX "idx_subscription_created_at" ON "subscription" ("created_at");--> statement-breakpoint
+CREATE INDEX "idx_taxonomy_type_status" ON "taxonomy" ("type","status");--> statement-breakpoint
+CREATE INDEX "idx_ticket_user" ON "ticket" ("user_id");--> statement-breakpoint
+CREATE INDEX "idx_ticket_status" ON "ticket" ("status");--> statement-breakpoint
+CREATE INDEX "idx_ticket_message_ticket" ON "ticket_message" ("ticket_id");--> statement-breakpoint
+CREATE INDEX "idx_user_name" ON "user" ("name");--> statement-breakpoint
+CREATE INDEX "idx_user_created_at" ON "user" ("created_at");--> statement-breakpoint
+CREATE INDEX "idx_user_event_user_created" ON "user_event" ("user_id","created_at");--> statement-breakpoint
+CREATE INDEX "idx_user_event_kind_created" ON "user_event" ("kind","created_at");--> statement-breakpoint
+CREATE INDEX "idx_user_invite_user" ON "user_invite" ("user_id");--> statement-breakpoint
+CREATE INDEX "idx_user_invite_code" ON "user_invite" ("invite_code_id");--> statement-breakpoint
+CREATE INDEX "idx_user_role_user_expires" ON "user_role" ("user_id","expires_at");--> statement-breakpoint
+CREATE INDEX "idx_verification_identifier" ON "verification" ("identifier");
