@@ -26,6 +26,8 @@ wrangler.jsonc
 .agents/
 .claude/
 .codex/
+AGENTS.md
+CLAUDE.md
 .claude/scheduled_tasks.lock
 
 # production
@@ -38,7 +40,6 @@ wrangler.jsonc
 .idea
 .vscode
 .cursor/*
-!.cursor/skills
 
 # misc
 .DS_Store
