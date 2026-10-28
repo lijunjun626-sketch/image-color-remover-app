@@ -1,0 +1,22 @@
+packages:
+  - .
+
+allowBuilds:
+  esbuild: true
+  ffmpeg-static: true
+  msw: true
+  sharp: true
+  workerd: true
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@swc/core'
+  - esbuild
+  - ffmpeg-static
+  - msw
+  - sharp
+  - workerd
+
+overrides:
+  seroval: 1.6.8
+  seroval-plugins: 1.6.8
